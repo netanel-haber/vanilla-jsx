@@ -4,7 +4,7 @@ const publicPath = path.join(__dirname, "public");
 
 module.exports = {
   entry: './src/index.jsx',
-  mode: process.env.NODE_ENV || "development",
+  mode: "production",
   module: {
     rules: [
       {
@@ -39,7 +39,7 @@ module.exports = {
     watchContentBase: true,
     compress: true
   },
-  devtool: "eval-source-map",
+  devtool: "none",
   stats: {
     colors: true
   }
