@@ -1,0 +1,1 @@
+export default (el) => Array.isArray(el) ? el : [el]
