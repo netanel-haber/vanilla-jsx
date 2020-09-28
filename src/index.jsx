@@ -1,7 +1,10 @@
 import App from './App';
 
 const root = document.getElementById("root");
-const remove = (e) => e.currentTarget.cleanup();
+const remove = (e) => {
+  e.currentTarget.cleanup();
+  e.currentTarget.remove()
+};
 
 root.appendChild(
   <div>
