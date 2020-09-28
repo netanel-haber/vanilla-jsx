@@ -37,7 +37,7 @@ An example:
 
 **Events**: I used the addEventListener event-type strings ("click", not "onClick") [described here](https://developer.mozilla.org/en-US/docs/Web/Events) - an inline set of these is generated in src/dom/utils/eventTypes and checked against when a function prop on a native HTML object (i.e. div etc.) is detected - if the propname is unrecognized an error is thrown. 
 
-so `<div click={()=>{}}/>` is legal, whereas **`<div handler={()=>{}}/>` will throw**.
+so `<div click={()=>{}}/>` is legal, whereas **`<div handler={()=>{}}/>` will throw**, because the event type "handler" is not recognized.
   
 **Styling**: I added in a styled components wrapper that uses [emotion](https://www.npmjs.com/package/emotion) and a very simple usage of the [proxy API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). So that's neat.
 If you don't like the bloat - you should uninstall emotion and just delete styled.js from the dom folder.
@@ -49,4 +49,14 @@ I wrote this wrapper to basically match the [styled-components](https://github.c
 **Fragments** are not supported.
 
 **Browser support**: When I am not being payed for code I like to not be in constant pain. so I freely used `Proxy`, `fromEntries`, `entries`, `spread` etc. I didn't wan't to include babel and polyfill desicions in order to prevent bloat.
+
+**Event Listener Cleanup**: the JSX dom function I wrote adds a `cleanup` function on elements with event listeners or children - i.e.  `el.cleanup = ()=>{...}` - this function, when invoked, first removes all event listeners from the element registered initially, then recursively calls itself on all children passed initially. Adding a function to native objects might be a terrible idea, if you have an alternative I'd love to hear about it. I'm also not entirely sure it's [necessary](https://stackoverflow.com/questions/36759256/do-i-need-to-remove-event-listeners-in-2016). Example:
+```
+const app = <App/>;
+app.remove()
+```
+
+**Source maps and other webpack config**: By default the config mode is set to production, with no sourcemap. Play around with it.
+
+
 

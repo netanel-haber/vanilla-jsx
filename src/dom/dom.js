@@ -44,7 +44,6 @@ function attachEventListenerCleanupFunc(el, eventHandlerEntries, children) {
       if (child.cleanup)
         child.cleanup();
     })
-    el.remove();
   }
 }
 
